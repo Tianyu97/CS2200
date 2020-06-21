@@ -1,0 +1,64 @@
+CS 2200 Spring 2020
+Project 4
+
+Name: Benjamin Melnick
+GT Username: bmelnick3
+
+Problem 1B
+----------
+
+Q: Run your OS simulation with 1, 2, and 4 CPUs. Compare the total execution time of each. Is there a linear relationship between the number of CPUs and total execution time? Why or why not? Keep in mind that the execution time refers to the simulated execution time.
+
+A: 
+
+Total execution time
+1 CPU:		67.7 s
+2 CPUs:		36.0 s	
+4 CPUs:		34.1 s
+
+No, clearly there is not a linear relationship between the number of CPUs and total execution time. Amdahl's law states that processor speedup increases asympototically as the number of processors increases, meaning that execution time will only marginally improve beyond a certain number of processors, as our simulation times show.
+
+Problem 2B
+----------
+
+Q: Run your Round-Robin scheduler with timeslices of 800ms, 600ms, 400ms, and 200ms. Use only one CPU for your tests. Compare the statistics at the end of the simulation. Show that the total waiting time decreases with shorter timeslices. However, in a real OS, the shortest timeslice possible is usually not the best choice. Why not?
+
+A:
+
+800ms
+Total Context Switches: 134
+Total execution time: 67.9 s
+Total time spent in READY state: 331.8 s
+
+600ms
+Total Context Switches: 160
+Total execution time: 67.6 s
+Total time spent in READY state: 314.7 s
+
+400ms
+Total Context Switches: 203
+Total execution time: 67.7 s
+Total time spent in READY state: 302.1 s
+
+200ms
+Total Context Switches: 361
+Total execution time: 67.6 s
+Total time spent in READY state: 283.2 s
+
+The statistics above show that shorter timeslices equate to decreased total waiting time in the simulation. However, in a real OS, a shorter timeslice means that less time is given to each process to execute on the CPU, leading to more context switches. With more context switches, the CPU has to execute more overhead, leading to longer execution times for processes.
+
+Problem 3B
+----------
+
+Q: Priority schedulers can sometimes lead to starvation among processes with lower priority. What is a way that operating systems can mitigate starvation in a priority scheduler?
+Run each of the scheduling algorithms using one CPU and compare the total waiting times. Which one had the lowest? Why?
+
+A: To mitigate starvation in a priority scheduler, the scheduler can artificially increase the priority of processes with lower priority that have been waiting for a while so they are pushed to the front of the priority queue and therefore selected before other jobs.
+
+Total time spent in READY state
+FIFO:			392.9 s
+Round-Robin (100ms):	285.8 s
+Priority w/ Preemption: 158.0 s
+
+Priority with preemption has the lowest waiting time. Priority w/ preemption is really a special case of the shortest job first scheduling algorithm, in which jobs with shorter CPU burst times receive higher priorities. As a result, shorter jobs are serviced first, so other processes spend less time on average waiting to be executed on the CPU.
+
